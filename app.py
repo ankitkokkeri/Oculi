@@ -17,6 +17,7 @@ from services.event_capture import load_scenario, capture_event
 from services.orchestration import route
 from services.feedback_capture import capture_feedback
 from crew import run_full_pipeline, run_lightweight_pipeline
+from tools.customer_lookup import set_overrides
 
 BASE_DIR = Path(__file__).parent
 
@@ -218,6 +219,85 @@ st.set_page_config(page_title="ArcCommerce Cross-Sell Engine", layout="wide", pa
 
 if "pipeline" not in st.session_state:
     st.session_state["pipeline"] = _fresh_pipeline_state()
+if "customer_overrides" not in st.session_state:
+    st.session_state["customer_overrides"] = {}
+if "activity_overrides" not in st.session_state:
+    st.session_state["activity_overrides"] = {}
+
+
+@st.dialog("Edit Customer Data", width="large")
+def _edit_customer_modal(cid: str, name: str):
+    customers_path = BASE_DIR / "data" / "customers.json"
+    activity_path = BASE_DIR / "data" / "customer_activity.json"
+    with open(customers_path) as f:
+        all_customers = json.load(f)
+    with open(activity_path) as f:
+        all_activities = json.load(f)
+
+    cust_ovr = st.session_state.get("customer_overrides", {})
+    act_ovr = st.session_state.get("activity_overrides", {})
+    current_profile = cust_ovr.get(cid) or next(
+        (c for c in all_customers if c["customer_id"] == cid), {}
+    )
+    current_activity = act_ovr.get(cid) or next(
+        (a for a in all_activities if a["customer_id"] == cid), {}
+    )
+
+    is_overridden = cid in cust_ovr or cid in act_ovr
+    st.markdown(
+        f"Editing mock data for **{name}**. "
+        "Changes are temporary — stored in runtime only and discarded on page refresh."
+    )
+    if is_overridden:
+        st.info("⚠️ This customer currently has active data overrides.", icon="✏️")
+
+    tab1, tab2 = st.tabs(["Customer Profile", "Activity Data"])
+
+    with tab1:
+        profile_text = st.text_area(
+            "Profile JSON",
+            value=json.dumps(current_profile, indent=2),
+            height=320,
+            key=f"modal_profile_{cid}",
+        )
+
+    with tab2:
+        activity_text = st.text_area(
+            "Activity JSON",
+            value=json.dumps(current_activity, indent=2),
+            height=420,
+            key=f"modal_activity_{cid}",
+        )
+
+    st.markdown("<br>", unsafe_allow_html=True)
+    col_apply, col_reset, _ = st.columns([1, 1, 3])
+
+    with col_apply:
+        if st.button("Apply Changes", type="primary", key=f"modal_apply_{cid}", use_container_width=True):
+            errors = []
+            new_profile, new_activity = None, None
+            try:
+                new_profile = json.loads(profile_text)
+            except json.JSONDecodeError as e:
+                errors.append(f"Profile JSON error: {e}")
+            try:
+                new_activity = json.loads(activity_text)
+            except json.JSONDecodeError as e:
+                errors.append(f"Activity JSON error: {e}")
+
+            if errors:
+                for err in errors:
+                    st.error(err)
+            else:
+                st.session_state["customer_overrides"][cid] = new_profile
+                st.session_state["activity_overrides"][cid] = new_activity
+                st.rerun()
+
+    with col_reset:
+        if st.button("Reset to Default", key=f"modal_reset_{cid}", use_container_width=True):
+            st.session_state["customer_overrides"].pop(cid, None)
+            st.session_state["activity_overrides"].pop(cid, None)
+            st.rerun()
 
 st.markdown(
     """
@@ -259,6 +339,17 @@ st.markdown(
     section[data-testid="stSidebar"] .stButton > button:disabled {
         background: #2a2a3a !important;
         color: #555 !important;
+    }
+    /* Edit Data button — secondary style */
+    section[data-testid="stSidebar"] [data-testid="stHorizontalBlock"] > div:last-child .stButton > button {
+        background: #1e1e2e;
+        color: #aaa;
+        border: 1px solid #3a3a4a;
+    }
+    section[data-testid="stSidebar"] [data-testid="stHorizontalBlock"] > div:last-child .stButton > button:hover {
+        background: #2a2a3e;
+        color: #ccc;
+        border-color: #5a5a7a;
     }
 
     /* ── Sidebar user card text ── */
@@ -468,22 +559,57 @@ with st.sidebar:
         cid = scenario["customer_id"]
         tier_icon = _TIER_ICON.get(scenario["lifecycle"], "⚪")
         route_color, route_bg = _ROUTE_COLORS.get(scenario["route_tag"], ("#555", "#eee"))
+        is_overridden = cid in st.session_state.get("customer_overrides", {}) or \
+                        cid in st.session_state.get("activity_overrides", {})
+        override_badge = (
+            ' <span style="font-size:10px;background:#fff3cd;color:#664d03;'
+            'padding:1px 7px;border-radius:10px;font-weight:700;">EDITED</span>'
+            if is_overridden else ""
+        )
+        display_name = st.session_state.get("customer_overrides", {}).get(cid, {}).get(
+            "name", scenario["customer_name"]
+        )
 
         with st.container(border=True):
             st.markdown(
-                f'<div class="user-card-name">{tier_icon} {scenario["customer_name"]}</div>'
+                f'<div class="user-card-name">{tier_icon} {display_name}{override_badge}</div>'
                 f'<div class="user-card-scenario" style="color:{route_color};">{scenario["scenario_label"]}</div>'
                 f'<div class="user-card-desc">{scenario["scenario_desc"]}</div>'
                 f'<span class="route-badge" style="color:{route_color};background:{route_bg};">'
                 f'{scenario["route_tag"]}</span>',
                 unsafe_allow_html=True,
             )
-            if st.button(
-                "⚡ Simulate Event",
-                key=f"btn_{cid}",
-                disabled=p["running"],
-                use_container_width=True,
-            ):
+            btn_col, edit_col = st.columns([3, 2])
+            with btn_col:
+                simulate_clicked = st.button(
+                    "⚡ Simulate Event",
+                    key=f"btn_{cid}",
+                    disabled=p["running"],
+                    use_container_width=True,
+                )
+            with edit_col:
+                edit_clicked = st.button(
+                    "✏️ Edit Data",
+                    key=f"edit_{cid}",
+                    disabled=p["running"],
+                    use_container_width=True,
+                )
+
+            if edit_clicked:
+                _edit_customer_modal(cid, scenario["customer_name"])
+
+            if simulate_clicked:
+                # Merge disk data with any in-memory overrides before starting
+                with open(BASE_DIR / "data" / "customers.json") as f:
+                    all_customers = json.load(f)
+                with open(BASE_DIR / "data" / "customer_activity.json") as f:
+                    all_activities = json.load(f)
+                cust_ovr = st.session_state.get("customer_overrides", {})
+                act_ovr = st.session_state.get("activity_overrides", {})
+                merged_customers = [cust_ovr.get(c["customer_id"], c) for c in all_customers]
+                merged_activities = [act_ovr.get(a["customer_id"], a) for a in all_activities]
+                set_overrides(merged_customers, merged_activities)
+
                 fresh = _fresh_pipeline_state()
                 fresh["running"] = True
                 fresh["selected_scenario"] = cid
@@ -521,7 +647,9 @@ with left_col:
         customers_path = BASE_DIR / "data" / "customers.json"
         with open(customers_path) as f:
             all_customers = json.load(f)
-        customer = next((c for c in all_customers if c["customer_id"] == event["customer_id"]), {})
+        cid_active = event["customer_id"]
+        customer = st.session_state.get("customer_overrides", {}).get(cid_active) or \
+                   next((c for c in all_customers if c["customer_id"] == cid_active), {})
 
         tier = customer.get("lifecycle_stage", "")
         tier_icon = _TIER_ICON.get(tier, "⚪")
