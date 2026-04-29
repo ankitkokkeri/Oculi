@@ -13,7 +13,7 @@ def build_outreach_agent(llm: LLM) -> Agent:
         backstory=(
             "You are a CRM strategist who crafts precise, personalised outreach for an e-commerce brand. "
             "You balance conversion intent with communication hygiene — never over-notifying, "
-            "never discounting unnecessarily. You write messages that feel human, not automated."
+            "never discounting unnecessarily. You write messages that feel human and friendly, not robotic."
         ),
         tools=[customer_lookup],
         llm=llm,
