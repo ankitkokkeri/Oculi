@@ -394,9 +394,29 @@ def _edit_customer_modal(cid: str, name: str):
 st.markdown(
     """
     <style>
-    /* ── Sidebar dark background ── */
+    /* ── Remove Streamlit's default top padding ── */
+    .block-container {
+        padding-top: 3rem !important;
+    }
+    /* ── Sidebar width — default 25vw, resizable by dragging ── */
+    section[data-testid="stSidebar"] {
+        width: 25vw;
+        min-width: 25vw !important;
+    }
+    section[data-testid="stSidebar"] > div:first-child {
+        width: 25vw;
+        min-width: 25vw !important;
+    }
+    /* ── Sidebar dark background + remove top gap ── */
     section[data-testid="stSidebar"] > div:first-child {
         background-color: #000000 !important;
+        padding-top: 0 !important;
+    }
+    /* Collapse the sidebar header (collapse-arrow row) to minimal height */
+    [data-testid="stSidebarHeader"] {
+        min-height: 0 !important;
+        height: 2rem !important;
+        padding: 0 !important;
     }
     section[data-testid="stSidebar"] .stMarkdown p,
     section[data-testid="stSidebar"] .stMarkdown small,
@@ -637,7 +657,7 @@ st.markdown(
 
 with st.sidebar:
     st.markdown(
-        '<div style="font-size:32px;font-weight:900;color:#3b82f6;margin-bottom:2px;letter-spacing:-0.5px;">Oculi</div>'
+        '<div style="font-size:52px;font-weight:900;color:#7dd3fc;margin-bottom:2px;letter-spacing:-1px;">Oculi</div>'
         '<div style="font-size:12px;color:#666;margin-bottom:20px;">Agentic Cross-Sell Engine</div>',
         unsafe_allow_html=True,
     )
