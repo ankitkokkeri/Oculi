@@ -225,63 +225,155 @@ if "activity_overrides" not in st.session_state:
     st.session_state["activity_overrides"] = {}
 
 
+_LIFECYCLE_OPTIONS  = ["new", "repeat", "loyal"]
+_CHANNEL_OPTIONS    = ["in_app", "whatsapp", "email"]
+
+
 @st.dialog("Edit Customer Data", width="large")
 def _edit_customer_modal(cid: str, name: str):
     customers_path = BASE_DIR / "data" / "customers.json"
-    activity_path = BASE_DIR / "data" / "customer_activity.json"
+    activity_path  = BASE_DIR / "data" / "customer_activity.json"
     with open(customers_path) as f:
         all_customers = json.load(f)
     with open(activity_path) as f:
         all_activities = json.load(f)
 
     cust_ovr = st.session_state.get("customer_overrides", {})
-    act_ovr = st.session_state.get("activity_overrides", {})
-    current_profile = cust_ovr.get(cid) or next(
-        (c for c in all_customers if c["customer_id"] == cid), {}
+    act_ovr  = st.session_state.get("activity_overrides", {})
+    current_profile  = cust_ovr.get(cid) or next(
+        (c for c in all_customers  if c["customer_id"] == cid), {}
     )
     current_activity = act_ovr.get(cid) or next(
         (a for a in all_activities if a["customer_id"] == cid), {}
     )
 
     is_overridden = cid in cust_ovr or cid in act_ovr
-    st.markdown(
-        f"Editing mock data for **{name}**. "
-        "Changes are temporary — stored in runtime only and discarded on page refresh."
-    )
-    if is_overridden:
-        st.info("⚠️ This customer currently has active data overrides.", icon="✏️")
-
-    tab1, tab2 = st.tabs(["Customer Profile", "Activity Data"])
-
-    with tab1:
-        profile_text = st.text_area(
-            "Profile JSON",
-            value=json.dumps(current_profile, indent=2),
-            height=320,
-            key=f"modal_profile_{cid}",
+    hdr_col, toggle_col = st.columns([3, 2])
+    with hdr_col:
+        st.markdown(
+            f"Editing mock data for **{name}**.  \n"
+            "<small style='color:#888;'>Temporary — discarded on page refresh.</small>",
+            unsafe_allow_html=True,
         )
+        if is_overridden:
+            st.info("This customer has active overrides.", icon="✏️")
+    with toggle_col:
+        st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
+        json_mode = st.toggle("{ } Raw JSON", key=f"modal_json_mode_{cid}")
 
-    with tab2:
-        activity_text = st.text_area(
+    st.divider()
+
+    tab_profile, tab_activity = st.tabs(["👤 Customer Profile", "📋 Activity Data"])
+
+    # ── Profile tab ──────────────────────────────────────────────────────────
+    with tab_profile:
+        if json_mode:
+            st.text_area(
+                "Profile JSON",
+                value=json.dumps(current_profile, indent=2),
+                height=380,
+                key=f"modal_profile_json_{cid}",
+            )
+        else:
+            col_l, col_r = st.columns(2)
+            with col_l:
+                st.text_input(
+                    "Name",
+                    value=current_profile.get("name", ""),
+                    key=f"form_name_{cid}",
+                )
+                lc = current_profile.get("lifecycle_stage", "new")
+                st.selectbox(
+                    "Lifecycle Stage",
+                    options=_LIFECYCLE_OPTIONS,
+                    index=_LIFECYCLE_OPTIONS.index(lc) if lc in _LIFECYCLE_OPTIONS else 0,
+                    format_func=str.capitalize,
+                    key=f"form_lifecycle_{cid}",
+                )
+            with col_r:
+                st.number_input(
+                    "Avg Order Value (₹)",
+                    min_value=0,
+                    max_value=100_000,
+                    step=100,
+                    value=int(current_profile.get("aov_inr", 0)),
+                    key=f"form_aov_{cid}",
+                )
+                ch = current_profile.get("preferred_channel", "in_app")
+                st.selectbox(
+                    "Preferred Channel",
+                    options=_CHANNEL_OPTIONS,
+                    index=_CHANNEL_OPTIONS.index(ch) if ch in _CHANNEL_OPTIONS else 0,
+                    format_func=lambda x: x.replace("_", " ").title(),
+                    key=f"form_channel_{cid}",
+                )
+
+            st.toggle(
+                "Opted into WhatsApp",
+                value=bool(current_profile.get("opted_in_whatsapp", False)),
+                key=f"form_whatsapp_{cid}",
+            )
+
+            st.markdown(
+                "<div style='font-size:13px;font-weight:600;margin-top:12px;margin-bottom:4px;'>"
+                "Previous Communications <span style='font-weight:400;color:#888;font-size:11px;'>(JSON)</span>"
+                "</div>",
+                unsafe_allow_html=True,
+            )
+            st.text_area(
+                "previous_communications",
+                value=json.dumps(current_profile.get("previous_communications", []), indent=2),
+                height=160,
+                label_visibility="collapsed",
+                key=f"form_comms_{cid}",
+            )
+
+    # ── Activity tab — always JSON (nested arrays) ────────────────────────────
+    with tab_activity:
+        st.caption("Past orders, browsing history, and session events — edited as JSON.")
+        st.text_area(
             "Activity JSON",
             value=json.dumps(current_activity, indent=2),
-            height=420,
-            key=f"modal_activity_{cid}",
+            height=400,
+            key=f"modal_activity_json_{cid}",
         )
 
+    # ── Actions ───────────────────────────────────────────────────────────────
     st.markdown("<br>", unsafe_allow_html=True)
     col_apply, col_reset, _ = st.columns([1, 1, 3])
 
     with col_apply:
         if st.button("Apply Changes", type="primary", key=f"modal_apply_{cid}", use_container_width=True):
-            errors = []
-            new_profile, new_activity = None, None
+            errors     = []
+            new_profile  = None
+            new_activity = None
+
+            # Build profile from active view
+            if json_mode:
+                try:
+                    new_profile = json.loads(st.session_state[f"modal_profile_json_{cid}"])
+                except json.JSONDecodeError as e:
+                    errors.append(f"Profile JSON error: {e}")
+            else:
+                try:
+                    comms = json.loads(st.session_state[f"form_comms_{cid}"])
+                except json.JSONDecodeError as e:
+                    errors.append(f"Previous Communications JSON error: {e}")
+                    comms = current_profile.get("previous_communications", [])
+                if not errors:
+                    new_profile = {
+                        **current_profile,
+                        "name":                   st.session_state[f"form_name_{cid}"],
+                        "lifecycle_stage":         st.session_state[f"form_lifecycle_{cid}"],
+                        "aov_inr":                st.session_state[f"form_aov_{cid}"],
+                        "preferred_channel":       st.session_state[f"form_channel_{cid}"],
+                        "opted_in_whatsapp":       st.session_state[f"form_whatsapp_{cid}"],
+                        "previous_communications": comms,
+                    }
+
+            # Activity always from JSON text area
             try:
-                new_profile = json.loads(profile_text)
-            except json.JSONDecodeError as e:
-                errors.append(f"Profile JSON error: {e}")
-            try:
-                new_activity = json.loads(activity_text)
+                new_activity = json.loads(st.session_state[f"modal_activity_json_{cid}"])
             except json.JSONDecodeError as e:
                 errors.append(f"Activity JSON error: {e}")
 
