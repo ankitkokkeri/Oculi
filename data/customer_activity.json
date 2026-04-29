@@ -1,0 +1,262 @@
+[
+  {
+    "customer_id": "C001",
+    "past_orders": [
+      {
+        "order_id": "ORD_C001_001",
+        "date": "2023-10-12T09:15:00Z",
+        "products": [
+          { "product_id": "P002", "name": "ArcBuds Lite", "category": "wireless_earbuds", "price": 1499 }
+        ],
+        "total_inr": 1499
+      },
+      {
+        "order_id": "ORD_C001_002",
+        "date": "2024-01-08T14:30:00Z",
+        "products": [
+          { "product_id": "P045", "name": "ArcCase Pro", "category": "carry_case", "price": 499 },
+          { "product_id": "P061", "name": "Sports Armband X", "category": "sports_accessory", "price": 299 }
+        ],
+        "total_inr": 798
+      },
+      {
+        "order_id": "ORD_C001_003",
+        "date": "2024-03-22T11:00:00Z",
+        "products": [
+          { "product_id": "P081", "name": "ArcBand Pro", "category": "smart_wearable", "price": 3499 }
+        ],
+        "total_inr": 3499
+      },
+      {
+        "order_id": "ORD_C001_004",
+        "date": "2024-04-01T16:45:00Z",
+        "products": [
+          { "product_id": "P071", "name": "ArcDock 3-in-1", "category": "charging_dock", "price": 1999 }
+        ],
+        "total_inr": 1999
+      }
+    ],
+    "recently_browsed": [
+      {
+        "product_id": "P045",
+        "name": "ArcCase Pro",
+        "category": "carry_case",
+        "browsed_at": "2024-04-28T18:45:00Z"
+      },
+      {
+        "product_id": "P045",
+        "name": "ArcCase Pro",
+        "category": "carry_case",
+        "browsed_at": "2024-04-27T11:10:00Z"
+      },
+      {
+        "product_id": "P001",
+        "name": "ArcBuds Pro",
+        "category": "wireless_earbuds",
+        "browsed_at": "2024-04-28T18:40:00Z"
+      },
+      {
+        "product_id": "P061",
+        "name": "Sports Armband X",
+        "category": "sports_accessory",
+        "browsed_at": "2024-04-26T09:30:00Z"
+      },
+      {
+        "product_id": "P081",
+        "name": "ArcBand Pro",
+        "category": "smart_wearable",
+        "browsed_at": "2024-04-23T20:15:00Z"
+      }
+    ],
+    "recent_sessions": [
+      {
+        "session_id": "S_20240428_C001_001",
+        "date": "2024-04-28T18:40:00Z",
+        "events": [
+          { "event_type": "page_view", "product_id": "P001", "timestamp": "2024-04-28T18:40:00Z" },
+          { "event_type": "page_view", "product_id": "P045", "timestamp": "2024-04-28T18:45:00Z" },
+          { "event_type": "search", "query": "wireless earbuds gym", "timestamp": "2024-04-28T18:38:00Z" }
+        ]
+      },
+      {
+        "session_id": "S_20240427_C001_001",
+        "date": "2024-04-27T11:05:00Z",
+        "events": [
+          { "event_type": "page_view", "product_id": "P045", "timestamp": "2024-04-27T11:10:00Z" },
+          { "event_type": "page_view", "product_id": "P061", "timestamp": "2024-04-27T11:18:00Z" }
+        ]
+      }
+    ]
+  },
+  {
+    "customer_id": "C002",
+    "past_orders": [
+      {
+        "order_id": "ORD_C002_001",
+        "date": "2024-04-20T13:00:00Z",
+        "products": [
+          { "product_id": "P002", "name": "ArcBuds Lite", "category": "wireless_earbuds", "price": 1499 },
+          { "product_id": "P046", "name": "ArcCase Lite", "category": "carry_case", "price": 299 }
+        ],
+        "total_inr": 1798
+      },
+      {
+        "order_id": "ORD_C002_002",
+        "date": "2024-04-22T10:30:00Z",
+        "products": [
+          { "product_id": "P072", "name": "ArcDock Slim", "category": "charging_dock", "price": 999 }
+        ],
+        "total_inr": 999
+      },
+      {
+        "order_id": "ORD_C002_003",
+        "date": "2024-04-25T15:20:00Z",
+        "products": [
+          { "product_id": "P091", "name": "ArcLight Desk Lamp", "category": "lifestyle_gadget", "price": 1299 }
+        ],
+        "total_inr": 1299
+      }
+    ],
+    "recently_browsed": [
+      {
+        "product_id": "P001",
+        "name": "ArcBuds Pro",
+        "category": "wireless_earbuds",
+        "browsed_at": "2024-04-28T20:00:00Z"
+      },
+      {
+        "product_id": "P045",
+        "name": "ArcCase Pro",
+        "category": "carry_case",
+        "browsed_at": "2024-04-28T20:05:00Z"
+      },
+      {
+        "product_id": "P001",
+        "name": "ArcBuds Pro",
+        "category": "wireless_earbuds",
+        "browsed_at": "2024-04-27T19:30:00Z"
+      },
+      {
+        "product_id": "P071",
+        "name": "ArcDock 3-in-1",
+        "category": "charging_dock",
+        "browsed_at": "2024-04-26T12:00:00Z"
+      },
+      {
+        "product_id": "P082",
+        "name": "ArcWatch SE",
+        "category": "smart_wearable",
+        "browsed_at": "2024-04-24T17:45:00Z"
+      }
+    ],
+    "recent_sessions": [
+      {
+        "session_id": "S_20240428_C002_001",
+        "date": "2024-04-28T20:00:00Z",
+        "events": [
+          { "event_type": "page_view", "product_id": "P001", "timestamp": "2024-04-28T20:00:00Z" },
+          { "event_type": "page_view", "product_id": "P045", "timestamp": "2024-04-28T20:05:00Z" }
+        ]
+      },
+      {
+        "session_id": "S_20240427_C002_001",
+        "date": "2024-04-27T19:28:00Z",
+        "events": [
+          { "event_type": "search", "query": "wireless earbuds upgrade", "timestamp": "2024-04-27T19:28:00Z" },
+          { "event_type": "page_view", "product_id": "P001", "timestamp": "2024-04-27T19:30:00Z" }
+        ]
+      }
+    ]
+  },
+  {
+    "customer_id": "C003",
+    "past_orders": [
+      {
+        "order_id": "ORD_C003_001",
+        "date": "2023-08-15T10:00:00Z",
+        "products": [
+          { "product_id": "P001", "name": "ArcBuds Pro", "category": "wireless_earbuds", "price": 2999 },
+          { "product_id": "P045", "name": "ArcCase Pro", "category": "carry_case", "price": 499 }
+        ],
+        "total_inr": 3498
+      },
+      {
+        "order_id": "ORD_C003_002",
+        "date": "2023-11-30T14:20:00Z",
+        "products": [
+          { "product_id": "P082", "name": "ArcWatch SE", "category": "smart_wearable", "price": 5999 }
+        ],
+        "total_inr": 5999
+      },
+      {
+        "order_id": "ORD_C003_003",
+        "date": "2024-02-14T09:00:00Z",
+        "products": [
+          { "product_id": "P071", "name": "ArcDock 3-in-1", "category": "charging_dock", "price": 1999 },
+          { "product_id": "P063", "name": "Hydration Smartbottle", "category": "sports_accessory", "price": 899 }
+        ],
+        "total_inr": 2898
+      },
+      {
+        "order_id": "ORD_C003_004",
+        "date": "2024-04-10T16:30:00Z",
+        "products": [
+          { "product_id": "P003", "name": "ArcBuds Sport", "category": "wireless_earbuds", "price": 2299 },
+          { "product_id": "P062", "name": "Gym Grip Gloves", "category": "sports_accessory", "price": 599 }
+        ],
+        "total_inr": 2898
+      }
+    ],
+    "recently_browsed": [
+      {
+        "product_id": "P001",
+        "name": "ArcBuds Pro",
+        "category": "wireless_earbuds",
+        "browsed_at": "2024-04-29T11:05:00Z"
+      },
+      {
+        "product_id": "P001",
+        "name": "ArcBuds Pro",
+        "category": "wireless_earbuds",
+        "browsed_at": "2024-04-28T17:30:00Z"
+      },
+      {
+        "product_id": "P071",
+        "name": "ArcDock 3-in-1",
+        "category": "charging_dock",
+        "browsed_at": "2024-04-27T14:00:00Z"
+      },
+      {
+        "product_id": "P061",
+        "name": "Sports Armband X",
+        "category": "sports_accessory",
+        "browsed_at": "2024-04-26T10:45:00Z"
+      },
+      {
+        "product_id": "P081",
+        "name": "ArcBand Pro",
+        "category": "smart_wearable",
+        "browsed_at": "2024-04-24T19:00:00Z"
+      }
+    ],
+    "recent_sessions": [
+      {
+        "session_id": "S_20240429_C003_001",
+        "date": "2024-04-29T11:05:00Z",
+        "events": [
+          { "event_type": "page_view", "product_id": "P001", "timestamp": "2024-04-29T11:05:00Z" },
+          { "event_type": "page_view", "product_id": "P003", "timestamp": "2024-04-29T11:08:00Z" }
+        ]
+      },
+      {
+        "session_id": "S_20240428_C003_001",
+        "date": "2024-04-28T17:25:00Z",
+        "events": [
+          { "event_type": "search", "query": "premium wireless earbuds ANC", "timestamp": "2024-04-28T17:25:00Z" },
+          { "event_type": "page_view", "product_id": "P001", "timestamp": "2024-04-28T17:30:00Z" },
+          { "event_type": "page_view", "product_id": "P071", "timestamp": "2024-04-28T17:38:00Z" }
+        ]
+      }
+    ]
+  }
+]

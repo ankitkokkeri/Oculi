@@ -13,12 +13,17 @@ def _make_llm(model: str) -> LLM:
 def _intent_task(agent, signal: dict, customer_id: str, on_complete=None) -> Task:
     return Task(
         description=(
-            f"Analyse the following session signal and customer profile to determine intent.\n\n"
+            f"Analyse the following session signal and customer activity to determine intent.\n\n"
             f"Session Signal:\n{json.dumps(signal, indent=2)}\n\n"
-            f"Use the customer_lookup tool with customer_id='{customer_id}' and the "
-            f"product_lookup tool with product_id='{signal['product_id']}' to gather context.\n\n"
+            f"Use the customer_lookup tool with customer_id='{customer_id}' to retrieve the customer's "
+            f"profile (AOV, lifecycle stage, channel preference) AND their full activity history "
+            f"(past_orders, recently_browsed, recent_sessions).\n"
+            f"Use the product_lookup tool with product_id='{signal['product_id']}' to get product details.\n\n"
+            f"Pay close attention to recently_browsed: if a product has been viewed multiple times in "
+            f"the last 7 days without being purchased, this signals latent intent — factor this into "
+            f"your goal inference.\n\n"
             f"Determine: What is the customer trying to accomplish? What is their job-to-be-done? "
-            f"What context would help a recommender select the right cross-sell products?"
+            f"What browsing or purchase context would help a recommender select the right cross-sell products?"
         ),
         expected_output=(
             "A JSON object with keys: inferred_goal (string), use_case_context (string), "
@@ -57,8 +62,14 @@ def _outreach_task(agent, signal: dict, customer_id: str, on_complete=None) -> T
         description=(
             f"Given the recommendations from the previous task, craft the outreach message.\n\n"
             f"Customer ID: {customer_id}\n"
-            f"Use customer_lookup to retrieve their profile, lifecycle stage, channel preference, "
-            f"AOV, and communication history.\n\n"
+            f"Use customer_lookup to retrieve their full profile (lifecycle stage, AOV, channel "
+            f"preference, previous_communications) AND their activity (past_orders, recently_browsed, "
+            f"recent_sessions).\n\n"
+            f"Use the activity data to calibrate tone and urgency:\n"
+            f"- If a recommended product appears in recently_browsed, the customer is already warm "
+            f"to it — be more direct and confident, no need to introduce it from scratch.\n"
+            f"- If recent_sessions shows high activity in the last 48 hours, the customer is in an "
+            f"active consideration phase — time the outreach accordingly.\n\n"
             f"Decide: channel (in_app / whatsapp / email), tone (confident/gentle), "
             f"whether to apply a bundle incentive (only for mid-AOV customers with moderate signals — "
             f"do NOT offer discounts to high-AOV loyal buyers unprompted).\n\n"
