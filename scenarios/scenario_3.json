@@ -1,0 +1,21 @@
+{
+  "customer_id": "C003",
+  "event_type": "page_view",
+  "product_id": "P001",
+  "product_name": "ArcBuds Pro",
+  "product_category": "wireless_earbuds",
+  "session_depth": 2,
+  "search_query": null,
+  "cart_contents": [],
+  "last_outreach_minutes_ago": null,
+  "last_session_minutes_ago": 18,
+  "cross_sell_rejected_this_session": false,
+  "returning_session": true,
+  "cached_intent": {
+    "inferred_goal": "Upgrading to a premium wireless audio setup",
+    "use_case_context": "Customer is evaluating ArcBuds Pro as an upgrade from ArcBuds Sport; interested in premium sound quality and ANC",
+    "customer_context": "Loyal buyer, high AOV, responds well to premium positioning and bundle offers",
+    "confidence": 0.91
+  },
+  "timestamp": "2024-04-29T11:23:00Z"
+}

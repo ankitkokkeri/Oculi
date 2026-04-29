@@ -1,0 +1,77 @@
+[
+  {
+    "customer_id": "C001",
+    "name": "Priya Sharma",
+    "lifecycle_stage": "repeat",
+    "aov_inr": 2800,
+    "preferred_channel": "in_app",
+    "opted_in_whatsapp": true,
+    "previous_communications": [
+      {
+        "channel": "in_app",
+        "message_summary": "Bundle offer for ArcBuds + ArcCase",
+        "outcome": "ACCEPTED"
+      },
+      {
+        "channel": "whatsapp",
+        "message_summary": "New arrival: ArcBand Pro launch notification",
+        "outcome": "IGNORED"
+      },
+      {
+        "channel": "in_app",
+        "message_summary": "Sports Armband X discount — 10% off",
+        "outcome": "ACCEPTED"
+      }
+    ]
+  },
+  {
+    "customer_id": "C002",
+    "name": "Rohan Verma",
+    "lifecycle_stage": "new",
+    "aov_inr": 1800,
+    "preferred_channel": "in_app",
+    "opted_in_whatsapp": false,
+    "previous_communications": [
+      {
+        "channel": "email",
+        "message_summary": "Welcome offer — 5% off first order",
+        "outcome": "ACCEPTED"
+      },
+      {
+        "channel": "in_app",
+        "message_summary": "ArcCase Lite — pairs with your earbuds",
+        "outcome": "IGNORED"
+      },
+      {
+        "channel": "email",
+        "message_summary": "Product review request for ArcBuds Lite",
+        "outcome": "IGNORED"
+      }
+    ]
+  },
+  {
+    "customer_id": "C003",
+    "name": "Ayesha Khan",
+    "lifecycle_stage": "loyal",
+    "aov_inr": 4200,
+    "preferred_channel": "whatsapp",
+    "opted_in_whatsapp": true,
+    "previous_communications": [
+      {
+        "channel": "whatsapp",
+        "message_summary": "Early access to ArcWatch SE — loyal customer invite",
+        "outcome": "ACCEPTED"
+      },
+      {
+        "channel": "in_app",
+        "message_summary": "ArcDock 3-in-1 bundle offer",
+        "outcome": "ACCEPTED"
+      },
+      {
+        "channel": "whatsapp",
+        "message_summary": "Referral reward — ₹500 credit",
+        "outcome": "ACCEPTED"
+      }
+    ]
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "wireless_earbuds": {
+    "carry_case": 0.34,
+    "sports_accessory": 0.21,
+    "charging_dock": 0.18,
+    "smart_wearable": 0.12,
+    "lifestyle_gadget": 0.06
+  },
+  "carry_case": {
+    "wireless_earbuds": 0.34,
+    "charging_dock": 0.08,
+    "sports_accessory": 0.09,
+    "smart_wearable": 0.05,
+    "lifestyle_gadget": 0.03
+  },
+  "sports_accessory": {
+    "wireless_earbuds": 0.21,
+    "smart_wearable": 0.27,
+    "carry_case": 0.09,
+    "charging_dock": 0.11,
+    "lifestyle_gadget": 0.07
+  },
+  "charging_dock": {
+    "wireless_earbuds": 0.18,
+    "smart_wearable": 0.31,
+    "sports_accessory": 0.11,
+    "carry_case": 0.08,
+    "lifestyle_gadget": 0.10
+  },
+  "smart_wearable": {
+    "charging_dock": 0.31,
+    "sports_accessory": 0.27,
+    "wireless_earbuds": 0.12,
+    "carry_case": 0.05,
+    "lifestyle_gadget": 0.09
+  },
+  "lifestyle_gadget": {
+    "wireless_earbuds": 0.06,
+    "smart_wearable": 0.09,
+    "charging_dock": 0.10,
+    "sports_accessory": 0.07,
+    "carry_case": 0.03
+  }
+}

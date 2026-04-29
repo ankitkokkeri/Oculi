@@ -1,0 +1,88 @@
+[
+  {
+    "order_id": "ORD_C001_001",
+    "customer_id": "C001",
+    "products": [
+      {"product_id": "P002", "name": "ArcBuds Lite", "category": "wireless_earbuds", "price": 1499}
+    ],
+    "total_inr": 1499,
+    "date": "2023-10-12"
+  },
+  {
+    "order_id": "ORD_C001_002",
+    "customer_id": "C001",
+    "products": [
+      {"product_id": "P045", "name": "ArcCase Pro", "category": "carry_case", "price": 499},
+      {"product_id": "P061", "name": "Sports Armband X", "category": "sports_accessory", "price": 299}
+    ],
+    "total_inr": 798,
+    "date": "2024-01-08"
+  },
+  {
+    "order_id": "ORD_C001_003",
+    "customer_id": "C001",
+    "products": [
+      {"product_id": "P081", "name": "ArcBand Pro", "category": "smart_wearable", "price": 3499}
+    ],
+    "total_inr": 3499,
+    "date": "2024-03-22"
+  },
+  {
+    "order_id": "ORD_C001_004",
+    "customer_id": "C001",
+    "products": [
+      {"product_id": "P071", "name": "ArcDock 3-in-1", "category": "charging_dock", "price": 1999}
+    ],
+    "total_inr": 1999,
+    "date": "2024-04-01"
+  },
+  {
+    "order_id": "ORD_C002_001",
+    "customer_id": "C002",
+    "products": [
+      {"product_id": "P002", "name": "ArcBuds Lite", "category": "wireless_earbuds", "price": 1499},
+      {"product_id": "P046", "name": "ArcCase Lite", "category": "carry_case", "price": 299}
+    ],
+    "total_inr": 1798,
+    "date": "2024-04-20"
+  },
+  {
+    "order_id": "ORD_C003_001",
+    "customer_id": "C003",
+    "products": [
+      {"product_id": "P001", "name": "ArcBuds Pro", "category": "wireless_earbuds", "price": 2999},
+      {"product_id": "P045", "name": "ArcCase Pro", "category": "carry_case", "price": 499}
+    ],
+    "total_inr": 3498,
+    "date": "2023-08-15"
+  },
+  {
+    "order_id": "ORD_C003_002",
+    "customer_id": "C003",
+    "products": [
+      {"product_id": "P082", "name": "ArcWatch SE", "category": "smart_wearable", "price": 5999}
+    ],
+    "total_inr": 5999,
+    "date": "2023-11-30"
+  },
+  {
+    "order_id": "ORD_C003_003",
+    "customer_id": "C003",
+    "products": [
+      {"product_id": "P071", "name": "ArcDock 3-in-1", "category": "charging_dock", "price": 1999},
+      {"product_id": "P063", "name": "Hydration Smartbottle", "category": "sports_accessory", "price": 899}
+    ],
+    "total_inr": 2898,
+    "date": "2024-02-14"
+  },
+  {
+    "order_id": "ORD_C003_004",
+    "customer_id": "C003",
+    "products": [
+      {"product_id": "P003", "name": "ArcBuds Sport", "category": "wireless_earbuds", "price": 2299},
+      {"product_id": "P062", "name": "Gym Grip Gloves", "category": "sports_accessory", "price": 599}
+    ],
+    "total_inr": 2898,
+    "date": "2024-04-10"
+  }
+]

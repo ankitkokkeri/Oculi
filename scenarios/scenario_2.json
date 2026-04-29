@@ -1,0 +1,18 @@
+{
+  "customer_id": "C002",
+  "event_type": "cart_addition",
+  "product_id": "P001",
+  "product_name": "ArcBuds Pro",
+  "product_category": "wireless_earbuds",
+  "session_depth": 2,
+  "search_query": null,
+  "cart_contents": [
+    {"product_id": "P001", "name": "ArcBuds Pro", "category": "wireless_earbuds", "price": 2999},
+    {"product_id": "P045", "name": "ArcCase Pro", "category": "carry_case", "price": 499}
+  ],
+  "last_outreach_minutes_ago": null,
+  "cross_sell_rejected_this_session": false,
+  "returning_session": false,
+  "cached_intent": null,
+  "timestamp": "2024-04-29T11:05:00Z"
+}

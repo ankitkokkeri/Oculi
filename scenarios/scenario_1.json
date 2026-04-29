@@ -1,0 +1,17 @@
+{
+  "customer_id": "C001",
+  "event_type": "cart_addition",
+  "product_id": "P001",
+  "product_name": "ArcBuds Pro",
+  "product_category": "wireless_earbuds",
+  "session_depth": 4,
+  "search_query": "wireless earbuds for gym",
+  "cart_contents": [
+    {"product_id": "P001", "name": "ArcBuds Pro", "category": "wireless_earbuds", "price": 2999}
+  ],
+  "last_outreach_minutes_ago": null,
+  "cross_sell_rejected_this_session": false,
+  "returning_session": false,
+  "cached_intent": null,
+  "timestamp": "2024-04-29T10:32:00Z"
+}

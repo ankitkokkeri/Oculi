@@ -1,0 +1,137 @@
+[
+  {
+    "product_id": "P001",
+    "name": "ArcBuds Pro",
+    "category": "wireless_earbuds",
+    "price": 2999,
+    "in_stock": true,
+    "description": "Premium wireless earbuds with ANC, IPX5 water resistance, 30hr battery, gym-ready fit.",
+    "compatible_with": ["carry_case", "sports_accessory", "charging_dock"]
+  },
+  {
+    "product_id": "P002",
+    "name": "ArcBuds Lite",
+    "category": "wireless_earbuds",
+    "price": 1499,
+    "in_stock": true,
+    "description": "Lightweight wireless earbuds, 20hr battery, basic noise isolation.",
+    "compatible_with": ["carry_case", "charging_dock"]
+  },
+  {
+    "product_id": "P003",
+    "name": "ArcBuds Sport",
+    "category": "wireless_earbuds",
+    "price": 2299,
+    "in_stock": true,
+    "description": "Sport-focused earbuds with ear hooks, IPX7, heart rate integration via companion app.",
+    "compatible_with": ["carry_case", "sports_accessory", "smart_wearable"]
+  },
+  {
+    "product_id": "P045",
+    "name": "ArcCase Pro",
+    "category": "carry_case",
+    "price": 499,
+    "in_stock": true,
+    "description": "Slim clip-on carry case for ArcBuds Pro, gym-proof hard shell, carabiner loop.",
+    "compatible_with": ["wireless_earbuds"]
+  },
+  {
+    "product_id": "P046",
+    "name": "ArcCase Lite",
+    "category": "carry_case",
+    "price": 299,
+    "in_stock": true,
+    "description": "Soft pouch carry case, fits all ArcBuds models, travel-friendly.",
+    "compatible_with": ["wireless_earbuds"]
+  },
+  {
+    "product_id": "P047",
+    "name": "ArcCase Vault",
+    "category": "carry_case",
+    "price": 799,
+    "in_stock": false,
+    "description": "Waterproof hard-shell case with built-in charging cable organiser.",
+    "compatible_with": ["wireless_earbuds", "charging_dock"]
+  },
+  {
+    "product_id": "P061",
+    "name": "Sports Armband X",
+    "category": "sports_accessory",
+    "price": 299,
+    "in_stock": true,
+    "description": "Stretch-fit phone armband for workouts, fits phones up to 6.9 inches.",
+    "compatible_with": ["wireless_earbuds", "smart_wearable"]
+  },
+  {
+    "product_id": "P062",
+    "name": "Gym Grip Gloves",
+    "category": "sports_accessory",
+    "price": 599,
+    "in_stock": true,
+    "description": "Touchscreen-compatible gym gloves with wrist support.",
+    "compatible_with": ["smart_wearable"]
+  },
+  {
+    "product_id": "P063",
+    "name": "Hydration Smartbottle",
+    "category": "sports_accessory",
+    "price": 899,
+    "in_stock": true,
+    "description": "BLE-enabled smart water bottle tracking hydration via app.",
+    "compatible_with": ["smart_wearable", "lifestyle_gadget"]
+  },
+  {
+    "product_id": "P071",
+    "name": "ArcDock 3-in-1",
+    "category": "charging_dock",
+    "price": 1999,
+    "in_stock": true,
+    "description": "Wireless charging dock for phone, earbuds, and smartwatch simultaneously.",
+    "compatible_with": ["wireless_earbuds", "smart_wearable"]
+  },
+  {
+    "product_id": "P072",
+    "name": "ArcDock Slim",
+    "category": "charging_dock",
+    "price": 999,
+    "in_stock": true,
+    "description": "Single-device wireless charging pad, 15W fast charge.",
+    "compatible_with": ["wireless_earbuds", "smart_wearable"]
+  },
+  {
+    "product_id": "P081",
+    "name": "ArcBand Pro",
+    "category": "smart_wearable",
+    "price": 3499,
+    "in_stock": true,
+    "description": "Smart fitness band with SpO2, sleep tracking, GPS, and 7-day battery.",
+    "compatible_with": ["sports_accessory", "charging_dock", "wireless_earbuds"]
+  },
+  {
+    "product_id": "P082",
+    "name": "ArcWatch SE",
+    "category": "smart_wearable",
+    "price": 5999,
+    "in_stock": true,
+    "description": "Stylish smartwatch with AMOLED display, health suite, and call support.",
+    "compatible_with": ["sports_accessory", "charging_dock", "wireless_earbuds"]
+  },
+  {
+    "product_id": "P091",
+    "name": "ArcLight Desk Lamp",
+    "category": "lifestyle_gadget",
+    "price": 1299,
+    "in_stock": true,
+    "description": "Smart LED desk lamp with touch control, adjustable colour temperature, USB-C charging port.",
+    "compatible_with": ["lifestyle_gadget"]
+  },
+  {
+    "product_id": "P092",
+    "name": "ArcClip Webcam",
+    "category": "lifestyle_gadget",
+    "price": 2499,
+    "in_stock": true,
+    "description": "1080p clip-on webcam for home offices, noise-cancelling dual mic.",
+    "compatible_with": ["lifestyle_gadget", "wireless_earbuds"]
+  }
+]
